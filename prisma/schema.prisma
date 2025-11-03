@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  SLAVE
+  DEVELOPER
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  name      String?
+  password  String
+  role      Role    @default(DEVELOPER)
+  createdAt DateTime @default(now())
+}
+
+model Victim {
+  id        Int      @id @default(autoincrement())
+  name      String
+  skills    String?
+  lastSeen  DateTime?
+  status    String   @default("captured")
+  capturedBy Int
+  createdAt DateTime @default(now())
+}
+
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  author    String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Reward {
+  id        Int      @id @default(autoincrement())
+  title     String
+  awardedTo Int?
+  createdAt DateTime @default(now())
+}
