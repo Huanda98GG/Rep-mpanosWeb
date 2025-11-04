@@ -1,0 +1,103 @@
+.App {
+  text-align: center;
+  background-color: #141414;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.App-header {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.App-header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.App-header nav li {
+  margin: 0 15px;
+}
+
+.App-header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.App-header nav a:hover {
+  color: #e50914;
+}
+
+.App-main {
+  padding: 20px;
+}
+
+.App-footer {
+  background-color: #1f1f1f;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 auto;
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+form h2 {
+  color: #e50914;
+}
+
+form input, form textarea {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e50914;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+}
+
+form button {
+  padding: 10px;
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #b20710;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+a {
+  color: #e50914;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

@@ -34,6 +34,7 @@ export class VictimsController {
   }
 
   @Get(':id')
+  @Roles('ADMIN')
   get(@Param('id') id: string) {
     return this.svc.findOne(Number(id));
   }
