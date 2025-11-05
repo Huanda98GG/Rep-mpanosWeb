@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import AdminUsers from './pages/AdminUsers';
 import AdminVictims from './pages/AdminVictims';
 import AdminFeedback from './pages/AdminFeedback';
+import AdminRewards from './pages/AdminRewards';
+import Rewards from './pages/Rewards';
 import Victims from './pages/Victims';
 import Feedback from './pages/Feedback';
 import Navbar from './components/Navbar';
@@ -26,7 +28,9 @@ function App() {
             <Route path="/admin/users" element={<AdminUsers />} />
             <Route path="/admin/victims" element={<AdminVictims />} />
             <Route path="/admin/feedback" element={<AdminFeedback />} />
+            <Route path="/admin/rewards" element={<AdminRewards />} />
             <Route path="/victims" element={<Victims />} />
+            <Route path="/rewards" element={<Rewards />} />
             <Route path="/feedback" element={<Feedback />} />
           </Routes>
         </main>

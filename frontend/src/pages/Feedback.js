@@ -5,19 +5,33 @@ function Feedback() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/feedback', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ feedback }),
-    });
-    const data = await response.json();
-    if (data.id) {
-      alert('Feedback submitted!');
-      setFeedback('');
-    } else {
-      alert('Failed to submit feedback');
+
+    try {
+      const token = localStorage.getItem('jsv_token');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/feedback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { 'Authorization': `Bearer ${token}` }), // agrega el token si existe
+        },
+        // backend expects `message` field for feedback
+        body: JSON.stringify({ message: feedback }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar el feedback');
+      }
+
+      const data = await response.json();
+      if (data.id) {
+        alert('✅ Feedback enviado con éxito!');
+        setFeedback('');
+      } else {
+        alert('❌ No se pudo enviar el feedback');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Hubo un problema al enviar tu feedback');
     }
   };
 

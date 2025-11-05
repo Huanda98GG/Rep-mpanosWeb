@@ -6,15 +6,26 @@ function AdminVictims() {
 
   useEffect(() => {
     const fetchVictims = async () => {
-      const token = localStorage.getItem('token');
-      const response = await fetch('/victims', {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setVictims(data);
+      try {
+  const token = localStorage.getItem('jsv_token');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/victims`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al obtener las víctimas');
+        }
+
+        const data = await response.json();
+        setVictims(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
     };
+
     fetchVictims();
   }, []);
 
@@ -23,7 +34,12 @@ function AdminVictims() {
       <h2>All Victims</h2>
       <ul>
         {victims.map((victim) => (
-          <li key={victim.id} dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(victim.name)}}></li>
+          <li
+            key={victim.id}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(victim.name),
+            }}
+          ></li>
         ))}
       </ul>
     </div>

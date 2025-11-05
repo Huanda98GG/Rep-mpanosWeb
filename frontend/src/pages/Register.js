@@ -1,3 +1,4 @@
+// Register.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,20 +8,32 @@ function Register() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
 
+  // ✅ Base URL del backend desde .env
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password, name }),
-    });
-    const data = await response.json();
-    if (data.id) {
-      navigate('/login');
-    } else {
-      alert('Registration failed');
+
+    try {
+      const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, name }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.id) {
+        alert('Registration successful!');
+        navigate('/login');
+      } else {
+        alert(data.message || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Register error:', error);
+      alert('Error connecting to server');
     }
   };
 

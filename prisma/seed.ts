@@ -19,6 +19,18 @@ async function main() {
   } else {
     console.log('Admin user already exists:', existing.email);
   }
+  // Seed some example rewards for convenience
+  const rewardsCount = await prisma.reward.count();
+  if (rewardsCount === 0) {
+    await prisma.reward.createMany({ data: [
+      { title: 'Golden USB' },
+      { title: 'Coffee Voucher' },
+      { title: 'Extra Vacation Day' }
+    ]});
+    console.log('Seeded example rewards');
+  } else {
+    console.log('Rewards already present:', rewardsCount);
+  }
 }
 
 main()
